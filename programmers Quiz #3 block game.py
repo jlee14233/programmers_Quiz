@@ -257,7 +257,7 @@ def solution(board):
     return count
 
 aa=time.time()
-solution(board)
+print(solution(board))
 bb=time.time()
 
 print(bb-aa)
