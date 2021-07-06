@@ -101,7 +101,7 @@ sumvalue=0
 #
 #     return sumvalue
 #
-
+matrix_sizes= [[5,10],[10,8],[8,8],[8,4]]
 import math
 
 
@@ -111,7 +111,7 @@ def solution(matrix_sizes):
     # start와 end가 동일한 경우는 연산하지 않으므로 0으로 설정.
     for idx in range(len(matrix_sizes)):
         table[idx][idx] = 0
-
+    # print()
     for gap in range(1, len(matrix_sizes)):
         for start in range(len(matrix_sizes)):
             end = start + gap
@@ -123,7 +123,8 @@ def solution(matrix_sizes):
                     table[start][sep] + table[sep + 1][end] + (
                                 matrix_sizes[start][0] * matrix_sizes[sep][1] * matrix_sizes[end][1])
                 )
-    print(table)
+        print(table)
+
     return table[0][-1]
 
 
