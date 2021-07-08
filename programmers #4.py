@@ -118,9 +118,7 @@ def solution(matrix_sizes):
             if end >= len(matrix_sizes):
                 break
             for sep in range(start, end):
-                table[start][end] = min(
-                    table[start][end],
-                    table[start][sep] + table[sep + 1][end] + (
+                table[start][end] = min(table[start][end],table[start][sep] + table[sep + 1][end] + (
                                 matrix_sizes[start][0] * matrix_sizes[sep][1] * matrix_sizes[end][1])
                 )
         print(table)
