@@ -69,5 +69,34 @@ for j in range(len(matrix_sizes)- 1):
         min_table = []
     ad+=1
 
-print(table[0][-1])
+# print(table[0][-1])
 
+def solution(matrix_sizes):
+    import math
+
+    table = [[math.inf for i in range(len(matrix_sizes))] for i in range(len(matrix_sizes))]
+
+    for i in range(len(matrix_sizes)):
+        table[i][i] = 0
+
+    d = []
+    for i in matrix_sizes:
+        d.append(i[0])
+    d.append(matrix_sizes[-1][1])
+
+    min_table = []
+    ad = 1
+    for j in range(len(matrix_sizes) - 1):
+        for i in range(len(matrix_sizes) - 1):
+            end = i + ad
+            if i + ad + 1 > len(matrix_sizes):
+                break
+            for k in range(len(matrix_sizes) - 1):
+                min_table.append(table[i][k] + table[k + 1][i + ad] + d[i] * d[k + 1] * d[i + ad + 1])
+            table[i][i + ad] = min(min_table)
+            min_table = []
+        ad += 1
+
+    return table[0][-1]
+
+print(solution(matrix_sizes))
