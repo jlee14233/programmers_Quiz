@@ -73,14 +73,11 @@ def solution(begin, end):
 
     return result
 
-"""
-효율성 테스트 필요 list comprehesion이 필요//
-실제 테스트에서는 모두 통과했으나, 효율성이 매우 떨어지는 코드임
 
-for i in range(0, end + 1):
-    result.append(1)
-n=[1,2,3,4,5]
-Test = [k for i in n for k in range(i*2, end+1, i) ]
-print(Test)
 
 """
+
+"""
+k = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+k = list(map(lambda x: x * 2, k))
+print(k)
