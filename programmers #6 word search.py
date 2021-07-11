@@ -34,37 +34,55 @@ words.sort()
 ?가 접두 혹은 접미이므로 이진탐색을 통해서 접근한다면 빠르게 처리할 수 있을 것이라고 생각함.
 접미일 경우는 위의 탐색으로 바로 해결할 수 있으므로 탐색에서 제외하는 것이 중요할 것,
 """
+## 밑의 구분은 접두사로 ?가 나왔을 때를 상정한다.
+que_pos={}
+for query in queries:
+    left=0
+    right=len(query)-1
+    if query.index('?')==0:
+        while left <= right:
+            mid = (left + right) // 2
+            if query[mid] == '?' and query[mid + 1] != '?':
+                break
+            elif query[mid] == '?':
+                left = mid
+            elif query[mid] != '?':
+                right = mid
+        que_pos[query]=0,mid+1,len(query)
+    else:
+        que_pos[query]=query.index('?') , len(query) ,len(query)
 
-t=queries[6] #????o T에 대한 이진탐색을 할 것
+print(que_pos)
+print(words)
+"""
+['frame', 'frodo', 'front', 'frost', 'frozen', 'kakao']
+question_position 딕셔너리에
+첫번째 ? 위치,
+두번째 ? 위치,
+단어의 총 길이를 모두 입력해두었다.
+else 부분이 효율성 테스트에서 떨어지는 탐색방법이라면, 이 부분을 고쳐야할 수도 있다.
+"""
+result=[]
+for key, value in que_pos.items():
+    t=key[value[0]:value[1]]
+    key=key.replace(t,"")
+    result.append(key)
 
-##이진탐색
-# def binary_search(arr, target, low=None, high=None):
-#     low, high = low or 0, high or len(arr) - 1
-#     if low > high:
-#         return -1
-#     mid = (low + high) // 2
-#     if arr[mid] > target:
-#         return binary_search(arr, target, low, mid)
-#     if arr[mid] == target:
-#         return mid
-#     if arr[mid] < target:
-#         return binary_search(arr, target, mid + 1, high)
-## 접두만 신경쓰면 된다.
+print(result)
 
-left=0
-right=len(t)-1
+# for word in words:
 
-while left<=right:
-    mid=(left+right)//2
-    if t[mid]=='?':
-        print(mid)
-        break
-    elif t[mid-1]!='?':
-        left = mid
-        print('\n',left)
-    elif t[mid+1]!='?':
-        right = mid
-        print(right)
-    print(mid)
+"""
+result
+[3, 2, 4, 1, 0]
+글자의 길이와 글자의 포지션과의 관계를 모두 정립한다면 쉽게 찾아낼 수 있을거 같음.
 
-print('\n',mid)
+접미형일 경우 value[0]!=0:
+0:value[0] 까지가 key값과 일치하는 것 and len(word)==value[2]:
+
+접두형일 경우 접두형 ==> value[0]==0:
+value[1]:value[2]의 값이 일치하고 len(word)==value[2]와 일치.
+
+"""
+
+
